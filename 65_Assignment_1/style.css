@@ -1,5 +1,4 @@
 /* ===================== GENERAL PAGE STYLES ===================== */
-/* Basic reset so every browser starts with the same spacing */
 * {
   margin: 0;
   padding: 0;
@@ -8,20 +7,15 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  /* light gray background fills the sides of the screen */
   background-color: #eef2f7;
-  color: #222222;              /* dark text */
+  color: #222222;           
   line-height: 1.6;
 }
 
-/* ===================== PAGE WRAPPER ===================== */
-/* This centered "card" holds all the page content. Giving it a fixed
-   width and a border makes the left/right edges of the screen look
-   intentional instead of empty. */
 .page-wrapper {
   max-width: 900px;
-  margin: 0 auto;             /* centers the card horizontally */
-  background-color: #ffffff;  /* white background for content */
+  margin: 0 auto;             
+  background-color: #ffffff;  
   border-left: 1px solid #cddbea;
   border-right: 1px solid #cddbea;
 }
@@ -45,10 +39,8 @@ nav a {
   margin: 0 15px;
   font-weight: bold;
   padding: 5px 10px;
-  border: 1px solid transparent; /* keeps spacing steady on hover */
+  border: 1px solid transparent; 
 }
-
-/* Simple hover effect for navigation links */
 nav a:hover {
   color: #ffffff;
   background-color: #1e5ea8;
@@ -59,32 +51,31 @@ nav a:hover {
 section {
   padding: 40px 40px;
   text-align: center;
-  border-bottom: 1px solid #dddddd; /* light divider between sections */
-  background-color: #ffffff; /* default section background */
+  border-bottom: 1px solid #dddddd; 
+  background-color: #ffffff; 
 }
 
-/* Alternating background colors give the page some visual rhythm
-   instead of large empty white areas */
+
 section:nth-of-type(even) {
-  background-color: #f4f8fc; /* very light blue tint */
+  background-color: #f4f8fc; 
 }
 
 section h2 {
-  color: #1e5ea8; /* blue accent for headings */
+  color: #1e5ea8; 
   margin-bottom: 15px;
 }
 
 section p {
   max-width: 650px;
-  margin: 10px auto; /* centers the paragraph block */
+  margin: 10px auto;
 }
 
 /* ===================== HERO SECTION ===================== */
 .profile-img {
   width: 150px;
   height: 150px;
-  border: 3px solid #1e5ea8; /* blue accent border */
-  border-radius: 50%;        /* makes the image circular */
+  border: 3px solid #1e5ea8; 
+  border-radius: 50%;       
   margin-bottom: 20px;
 }
 
@@ -98,22 +89,22 @@ section p {
 /* ===================== SKILLS & INTERESTS LISTS ===================== */
 #skills ul,
 #interests ul {
-  list-style: none; /* removes default bullet points */
+  list-style: none;
   max-width: 400px;
   margin: 0 auto;
 }
 
 #skills li {
-  background-color: #f4f8fc;      /* very light blue background */
-  border: 1px solid #1e5ea8;      /* blue accent border */
+  background-color: #f4f8fc;     
+  border: 1px solid #1e5ea8;      
   color: #222222;
   padding: 8px;
   margin: 8px 0;
 }
 
 #interests li {
-  background-color: #ffffff;      /* white so it stands out on the tinted section */
-  border: 1px solid #1e5ea8;      /* blue accent border */
+  background-color: #ffffff;     
+  border: 1px solid #1e5ea8;      
   color: #222222;
   padding: 8px;
   margin: 8px 0;
@@ -134,6 +125,6 @@ section p {
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #1e5ea8; /* blue accent background */
+  background-color: #1e5ea8;
   color: #ffffff;
 }

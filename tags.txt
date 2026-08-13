@@ -1,0 +1,87 @@
+#Structural Tabs : 
+<html> root of the webpage
+<head> contain meta data like title , css links 
+<title> browser tab title
+<body> Visible webpage content
+
+#Headings
+goes from h1 to h6
+h1 : main Heading
+h2 : sub Headings
+h3 : Small heading 
+h4 , h5 : Small and smallest Headings
+
+#Paragraph 
+<p>This is a Paragraph</p>
+
+#Line Breaker
+Hello<br>
+World
+
+#Horizontal line seperator
+<hr>
+
+#Bold italic underline
+<b>Bold</b>
+<strong>Imp text</strong>
+<i>Italic</i>
+<em>Emphasized</em>
+<u></underline>
+
+#links
+<a href="link">Visit Link</a>
+for new tab
+<a/href="link"target="_blank">Visit</a>
+
+#Images
+<img src=""image.jpg" alt="image">
+With Size
+<img src="image.jpg" width="{int value}">
+
+#List
+Ordered List
+<ol>
+    <li>ele1</li>
+    <li>ele2</li>
+    <li>ele3</li>
+</ol>
+
+Unordered List
+<ul>
+    <li>ele1</li>
+    <li>ele2</li>
+    <li>ele3</li>
+</ul>
+
+#Div (Groups elements together)
+<div>
+<h2>About Me</h2>
+<p>I am Shaizaan Shaikh</p>
+</div>
+
+#Span (Used for styling and targeting inline text)
+<p>I am Shaizaan Shaikh<span>Blue</span></p>
+
+#Button
+<button>Click me</button>
+
+#Tables
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+
+    <tr>
+        <td>Shaizaan</td>
+        <td>20</td>
+    </tr>
+</table>
+
+#Forms
+<form>
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <button>Submit</button>
+</from>
+
