@@ -1,147 +1,127 @@
-let students = [];
+// Get the form element from the HTML page
+const form = document.getElementById('employeeForm');
 
-function showMarksSection() {
+// Listen for the submit event when the user clicks Register Employee
+form.addEventListener('submit', function (event) {
+  // Prevent page refresh on form submission
+  event.preventDefault();
 
-  let name = document.getElementById("name").value.trim();
-  let roll = document.getElementById("roll").value.trim();
+  // Read values entered by the user
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const phone = document.getElementById('phone').value.trim();
+  const department = document.getElementById('department').value;
 
-  if (name === "" || roll === "") {
-    alert("Please enter student name and roll number");
-    return;
-  }
+  // Get all error message elements
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+  const phoneError = document.getElementById('phoneError');
+  const departmentError = document.getElementById('departmentError');
+  const successMessage = document.getElementById('successMessage');
 
-  document.getElementById("studentSection").classList.add("hidden");
-  document.getElementById("marksSection").classList.remove("hidden");
-}
+  // Clear previous messages before validation
+  nameError.textContent = '';
+  emailError.textContent = '';
+  passwordError.textContent = '';
+  phoneError.textContent = '';
+  departmentError.textContent = '';
+  successMessage.textContent = '';
 
-function addStudent() {
-
-  let name = document.getElementById("name").value;
-  let roll = document.getElementById("roll").value;
-
-  let m1 = Number(document.getElementById("m1").value);
-  let m2 = Number(document.getElementById("m2").value);
-  let m3 = Number(document.getElementById("m3").value);
-  let m4 = Number(document.getElementById("m4").value);
-  let m5 = Number(document.getElementById("m5").value);
-
-  let marks = [m1, m2, m3, m4, m5];
-
-  for (let i = 0; i < marks.length; i++) {
-    if (isNaN(marks[i]) || marks[i] < 0 || marks[i] > 100) {
-      alert("Enter valid marks between 0 and 100");
-      return;
-    }
-  }
-
-  let total = m1 + m2 + m3 + m4 + m5;
-
-  let percentage = (total / 500) * 100;
-
-  let grade = "";
-
-  if (percentage >= 90)
-    grade = "A+";
-  else if (percentage >= 80)
-    grade = "A";
-  else if (percentage >= 70)
-    grade = "B";
-  else if (percentage >= 60)
-    grade = "C";
-  else if (percentage >= 50)
-    grade = "D";
-  else
-    grade = "F";
-
-  let result = "Pass";
-
-  if (m1 < 35 || m2 < 35 || m3 < 35 || m4 < 35 || m5 < 35) {
-    result = "Fail";
-    grade = "F";
-  }
-
-  students.push({
-    roll,
-    name,
-    total,
-    percentage,
-    grade,
-    result
+  // Remove old validation styles from all inputs
+  document.querySelectorAll('input, select').forEach((field) => {
+    field.classList.remove('input-error', 'input-success');
   });
 
-  displayStudents();
+  // Track whether the form is valid
+  let valid = true;
 
-  clearFields();
-}
+  // -------------------------
+  // Name validation
+  // -------------------------
+  const namePattern = /^[A-Za-z ]{3,}$/;
+  if (name === '') {
+    nameError.textContent = 'Name is required.';
+    document.getElementById('name').classList.add('input-error');
+    valid = false;
+  } else if (!namePattern.test(name)) {
+    nameError.textContent = 'Name must contain only letters and spaces with at least 3 characters.';
+    document.getElementById('name').classList.add('input-error');
+    valid = false;
+  } else {
+    document.getElementById('name').classList.add('input-success');
+  }
 
-function displayStudents() {
+  // -------------------------
+  // Email validation
+  // -------------------------
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email === '') {
+    emailError.textContent = 'Email is required.';
+    document.getElementById('email').classList.add('input-error');
+    valid = false;
+  } else if (!emailPattern.test(email)) {
+    emailError.textContent = 'Please enter a valid email address.';
+    document.getElementById('email').classList.add('input-error');
+    valid = false;
+  } else {
+    document.getElementById('email').classList.add('input-success');
+  }
 
-  let body = document.getElementById("tableBody");
+  // -------------------------
+  // Password validation
+  // -------------------------
+  const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+  if (password === '') {
+    passwordError.textContent = 'Password is required.';
+    document.getElementById('password').classList.add('input-error');
+    valid = false;
+  } else if (!passwordPattern.test(password)) {
+    passwordError.textContent = 'Password must be at least 8 characters with one uppercase, one number, and one special character.';
+    document.getElementById('password').classList.add('input-error');
+    valid = false;
+  } else {
+    document.getElementById('password').classList.add('input-success');
+  }
 
-  body.innerHTML = "";
+  // -------------------------
+  // Phone validation
+  // -------------------------
+  const phonePattern = /^[6-9]\d{9}$/;
+  if (phone === '') {
+    phoneError.textContent = 'Phone number is required.';
+    document.getElementById('phone').classList.add('input-error');
+    valid = false;
+  } else if (!phonePattern.test(phone)) {
+    phoneError.textContent = 'Enter a valid 10-digit Indian mobile number.';
+    document.getElementById('phone').classList.add('input-error');
+    valid = false;
+  } else {
+    document.getElementById('phone').classList.add('input-success');
+  }
 
-  let highest = 0;
-  let topper = "None";
+  // -------------------------
+  // Department validation
+  // -------------------------
+  if (department === '') {
+    departmentError.textContent = 'Please select a department.';
+    document.getElementById('department').classList.add('input-error');
+    valid = false;
+  } else {
+    document.getElementById('department').classList.add('input-success');
+  }
 
-  students.forEach((s) => {
-
-    if (s.percentage > highest) {
-
-      highest = s.percentage;
-      topper = s.name;
-
+  // -------------------------
+  // Final result
+  // -------------------------
+  if (valid) {
+    successMessage.textContent = 'Employee registered successfully!';
+    form.reset();
+  } else {
+    const firstError = document.querySelector('.input-error');
+    if (firstError) {
+      firstError.focus();
     }
-
-  });
-
-  students.forEach((s, index) => {
-
-    let row = body.insertRow();
-
-    if (s.percentage === highest) {
-
-      row.classList.add("topper");
-
-    }
-
-    row.innerHTML = `
-
-      <td>${s.roll}</td>
-      <td>${s.name}</td>
-      <td>${s.total}</td>
-      <td>${s.percentage.toFixed(2)}%</td>
-      <td>${s.grade}</td>
-      <td class="${s.result === "Pass" ? "pass" : "fail"}">${s.result}</td>
-      <td>
-        <button onclick="deleteStudent(${index})">Delete</button>
-      </td>
-
-    `;
-
-  });
-
-  document.getElementById("topper").innerHTML =
-    "Topper : " + topper + " (" + highest.toFixed(2) + "%)";
-}
-
-function deleteStudent(index) {
-
-  students.splice(index, 1);
-
-  displayStudents();
-}
-
-function clearFields() {
-
-  document.getElementById("name").value = "";
-  document.getElementById("roll").value = "";
-
-  document.getElementById("m1").value = "";
-  document.getElementById("m2").value = "";
-  document.getElementById("m3").value = "";
-  document.getElementById("m4").value = "";
-  document.getElementById("m5").value = "";
-
-  document.getElementById("marksSection").classList.add("hidden");
-  document.getElementById("studentSection").classList.remove("hidden");
-}
+  }
+});

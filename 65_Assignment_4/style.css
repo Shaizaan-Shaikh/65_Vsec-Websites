@@ -1,165 +1,153 @@
+/*
+  Universal reset for better layout consistency
+*/
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
+/*
+  Page background and center alignment
+*/
 body {
-  background: #f5f7fb;
   min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
+  background: linear-gradient(135deg, #eef4ff, #f7f9fc);
+  padding: 20px;
 }
 
+/*
+  Main form card styling
+*/
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 500px;
   background: #ffffff;
-  padding: 32px;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  padding: 30px 25px;
 }
 
-h1 {
+/*
+  Heading styling
+*/
+h2 {
   text-align: center;
-  color: #111827;
-  margin-bottom: 28px;
-  font-size: 2rem;
-  font-weight: 700;
+  margin-bottom: 25px;
+  color: #1f2937;
 }
 
-.form-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  margin-bottom: 28px;
+/*
+  Form input spacing
+*/
+.form-group {
+  margin-bottom: 18px;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-}
-
+/*
+  Label styling
+*/
 label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
+  display: block;
   margin-bottom: 8px;
+  font-weight: 700;
+  color: #374151;
 }
 
-input {
+/*
+  Shared style for input, select, and button
+*/
+input,
+select,
+button {
   width: 100%;
-  padding: 14px 16px;
+  border-radius: 10px;
+}
+
+/*
+  Fields styling
+*/
+input,
+select {
+  padding: 12px 14px;
   border: 1px solid #d1d5db;
-  border-radius: 12px;
-  background: #ffffff;
   font-size: 15px;
-  color: #111827;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: 0.2s ease;
+  background: #fff;
 }
 
-input::placeholder {
-  color: #9ca3af;
-}
-
-input:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
-button {
-  grid-column: 1 / -1;
+/*
+  Error message styling
+*/
+.error {
+  display: block;
+  min-height: 18px;
   margin-top: 6px;
-  padding: 14px;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+/*
+  Validation styles for invalid and valid fields
+*/
+.input-error {
+  border-color: #dc2626 !important;
+  background: #fff5f5;
+}
+
+.input-success {
+  border-color: #16a34a !important;
+  background: #f0fdf4;
+}
+
+/*
+  Submit button styling
+*/
+button {
   border: none;
-  border-radius: 12px;
   background: #2563eb;
-  color: #ffffff;
+  color: #fff;
+  padding: 13px 16px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: 0.2s ease;
 }
 
 button:hover {
   background: #1d4ed8;
 }
 
-.hidden {
-  display: none;
-}
-
-#topper {
-  margin: 24px 0 16px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #dbeafe;
-  font-weight: 600;
+/*
+  Success message after valid form submission
+*/
+.success {
+  margin-top: 16px;
   text-align: center;
-}
-
-.table-box {
-  overflow-x: auto;
-  border-radius: 14px;
-  border: 1px solid #e5e7eb;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  background: #f8fafc;
-}
-
-th {
-  padding: 14px;
-  text-align: center;
-  color: #374151;
-  font-size: 14px;
-  font-weight: 700;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-td {
-  padding: 14px;
-  text-align: center;
-  color: #111827;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-tbody tr:hover {
-  background: #f8fafc;
-}
-
-.topper {
-  background: #fef3c7 !important;
-  font-weight: 700;
-}
-
-.pass {
   color: #15803d;
   font-weight: 700;
 }
 
-.fail {
-  color: #dc2626;
-  font-weight: 700;
-}
+/*
+  Responsive mobile styling
+*/
+@media (max-width: 600px) {
+  .container {
+    padding: 22px 18px;
+  }
 
-td button {
-  background: #ef4444;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-td button:hover {
-  background: #dc2626;
+  h2 {
+    font-size: 24px;
+  }
 }

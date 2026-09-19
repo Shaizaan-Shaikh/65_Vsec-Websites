@@ -1,0 +1,243 @@
+/*
+  General page styling
+*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f6fb;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/*
+  Header and navigation
+*/
+.site-header {
+  background: #0d6efd;
+  color: white;
+  padding: 18px 20px;
+}
+
+.navbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/*
+  Hero section
+*/
+.hero {
+  background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.hero p {
+  margin: 0 0 20px;
+  font-size: 1.1rem;
+}
+
+.btn {
+  display: inline-block;
+  background: #facc15;
+  color: #111827;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/*
+  Main content layout
+*/
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #0f172a;
+}
+
+/*
+  About section
+*/
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.about-image {
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+.about-text h2,
+.register-section h2 {
+  color: #1d4ed8;
+  margin-bottom: 12px;
+}
+
+/*
+  Event table styling
+*/
+.table-wrap {
+  overflow-x: auto;
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.event-table th,
+.event-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.event-table th {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.event-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.price {
+  color: #15803d;
+  font-weight: 700;
+}
+
+/*
+  Register form styling
+*/
+.register-section {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/*
+  Footer styling
+*/
+.site-footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 24px 18px;
+}
+
+.site-footer a {
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .about-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+}
