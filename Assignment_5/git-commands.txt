@@ -1,0 +1,72 @@
+# Git Commands Reference – Assignment 5
+
+# -----------------------------------------------
+# STARTING A NEW GIT PROJECT (if not already done)
+# -----------------------------------------------
+
+# Navigate to your project folder
+cd path/to/your/project
+
+# Initialize a new Git repository
+git init
+
+# Add all files to staging area
+git add .
+
+# Make the first commit
+git commit -m "Initial commit"
+
+# Rename branch to main
+git branch -M main
+
+# Add the remote GitHub repository
+git remote add origin https://github.com/ChaitanyaMore37/Full-Stack-Assignments.git
+
+# Push to GitHub and set upstream
+git push -u origin main
+
+
+# -----------------------------------------------
+# VERIFYING THE EXISTING REPOSITORY
+# -----------------------------------------------
+
+# Check which files are modified or untracked
+git status
+
+# Check current branch
+git branch
+
+# Verify the remote URL
+git remote -v
+
+# View recent commit history
+git log --oneline
+
+
+# -----------------------------------------------
+# DAY-TO-DAY WORKFLOW
+# -----------------------------------------------
+
+# Stage specific file
+git add filename.html
+
+# Stage all changes
+git add .
+
+# Commit with a descriptive message
+git commit -m "Add student result page"
+
+# Push to remote (origin main)
+git push
+
+# Pull latest changes from GitHub
+git pull
+
+# Create and switch to a new branch
+git checkout -b feature-branch
+
+# Switch back to main
+git checkout main
+
+# Merge a branch into main
+git merge feature-branch
