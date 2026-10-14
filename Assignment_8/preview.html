@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student CRUD · Assignment 8 Preview</title><link rel="stylesheet" href="../assignment-hub.css"><link rel="stylesheet" href="preview.css"><script src="preview.js" defer></script></head>
+<body>
+<header><a class="brand" href="../index.html">SS<span>.</span></a><a href="../index.html">← All assignments</a></header>
+<main>
+ <p class="eyebrow">ASSIGNMENT 08 · SAMPLE PREVIEW</p><h1>Student records<span>.</span></h1>
+ <p class="intro">Try adding, editing and deleting fictional student records.<br>This preview uses temporary browser data. Refreshing restores the sample records.</p>
+ <div class="preview-layout">
+  <section class="panel"><h2 id="form-title">Add a student</h2><form id="student-form">
+   <label>Name<input name="name" required maxlength="100" placeholder="Student name"></label>
+   <label>Roll number<input name="rollNumber" required maxlength="30" placeholder="e.g. 65"></label>
+   <label>Department<input name="department" required maxlength="80" value="Information Technology"></label>
+   <label>Marks<input name="marks" required type="number" min="0" max="100" step="0.01" placeholder="0–100"></label>
+   <div class="buttons"><button type="submit" id="save">Add student</button><button type="button" class="secondary" id="cancel" hidden>Cancel edit</button></div>
+  </form></section>
+  <section class="panel"><div class="list-heading"><h2>Students <span id="count"></span></h2><button type="button" class="secondary" id="reset">Reset sample</button></div><p id="status" role="status" aria-live="polite"></p><div id="students"></div></section>
+ </div>
+ <p class="note">The real assignment uses Express and MongoDB for persistent CRUD operations. <a href="https://github.com/Shaizaan-Shaikh/65_Vsec-Websites/tree/main/Assignment_8">View API source and setup instructions ↗</a></p>
+</main><footer>Assignment 8 · Student CRUD API sample preview</footer>
+</body></html>

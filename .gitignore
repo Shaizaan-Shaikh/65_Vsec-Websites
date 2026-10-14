@@ -1,0 +1,7 @@
+.report-revision/
+.venv/
+Mini_Project/**/report/
+node_modules/
+.env
+.data/
+*.log

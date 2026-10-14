@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wayfarer · Your trips</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/api.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark" aria-hidden="true">↗</span> wayfarer<span
+          class="brand-dot"
+          >.</span
+        ></a
+      ><span class="header-note">A little planning. A better journey.</span
+      ><a class="nav-link" href="index.html" aria-current="page">My trips</a>
+    </header>
+    <main class="container">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">YOUR NEXT CHAPTER</p>
+          <h1>Good trips start<br />with a little plan.</h1>
+          <p class="intro">
+            Keep your days organised and your budget in sight.<br />Make room
+            for the moments that matter.
+          </p>
+          <button class="primary" id="create-trip">＋ Plan a trip</button>
+        </div>
+        <div class="travel-note" aria-hidden="true">
+          <span class="note-label">THE TRAVEL CHECKLIST</span>
+          <div class="note-line"><b>01</b> Pick a place <span>↗</span></div>
+          <div class="note-line"><b>02</b> Plan your days <span>↗</span></div>
+          <div class="note-line"><b>03</b> Know your budget <span>↗</span></div>
+          <p>Less guesswork. More exploring.</p>
+        </div>
+      </section>
+      <div
+        id="message"
+        class="message"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+      <section class="overview" aria-label="Your travel overview">
+        <div><span>Saved trips</span><strong id="trip-count">—</strong></div>
+        <div>
+          <span>Total allocated</span><strong id="total-budget">—</strong>
+        </div>
+        <div>
+          <span>Actual spending</span><strong id="total-spent">—</strong>
+        </div>
+      </section>
+      <section class="section-heading">
+        <div>
+          <p class="eyebrow">COLLECT PLANS, THEN MEMORIES</p>
+          <h2>Your journeys</h2>
+        </div>
+        <button id="reload" class="secondary">Refresh trips</button>
+      </section>
+      <div id="trips" class="trip-grid" aria-live="polite">
+        <p>Loading your trips…</p>
+      </div>
+    </main>
+    <footer class="container footer">
+      WAYFARER / Travel Itinerary &amp; Budget Planner
+      <span>Plan thoughtfully. Travel freely.</span>
+    </footer>
+    <dialog id="trip-dialog" aria-labelledby="trip-dialog-title">
+      <form id="trip-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">LET’S GO SOMEWHERE</p>
+            <h2 id="trip-dialog-title">Plan a trip</h2>
+          </div>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ×
+          </button>
+        </div>
+        <div id="trip-fields"></div>
+        <p class="form-error" role="alert"></p>
+        <div class="form-actions">
+          <button type="button" class="secondary" data-close>Cancel</button
+          ><button class="primary" type="submit">Save trip</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

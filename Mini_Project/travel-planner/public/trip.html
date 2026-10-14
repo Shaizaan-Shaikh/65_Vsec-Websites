@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trip details · Wayfarer</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/api.js" defer></script>
+    <script src="js/trip.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark" aria-hidden="true">↗</span> wayfarer<span
+          class="brand-dot"
+          >.</span
+        ></a
+      ><span class="header-note">Every detail, in one place.</span
+      ><a class="nav-link" href="index.html">My trips</a>
+    </header>
+    <main class="container">
+      <div class="back-row">
+        <a href="index.html">← All journeys</a
+        ><button class="secondary" id="reload">Refresh details</button>
+      </div>
+      <div
+        id="message"
+        class="message"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+      <p id="loading">Loading your journey…</p>
+      <div id="trip-content" hidden>
+        <section class="detail-heading">
+          <div>
+            <p class="eyebrow" id="destination"></p>
+            <h1 id="trip-name"></h1>
+            <p class="muted" id="trip-meta"></p>
+            <p id="trip-description" class="description"></p>
+          </div>
+          <div class="button-row">
+            <button class="secondary" id="edit-trip">Edit trip</button
+            ><button class="danger-button" id="delete-trip">Delete trip</button>
+          </div>
+        </section>
+        <section class="budget-panel" aria-label="Trip budget">
+          <div class="budget-heading">
+            <h2>A clear view of your budget</h2>
+            <span class="tag">INR · whole trip</span>
+          </div>
+          <div class="budget-grid">
+            <div>
+              <span>Allocated budget</span><strong id="allocated"></strong>
+            </div>
+            <div><span>Planned cost</span><strong id="planned"></strong></div>
+            <div><span>Actual spending</span><strong id="actual"></strong></div>
+            <div>
+              <span id="remaining-label">Remaining budget</span
+              ><strong id="remaining"></strong>
+            </div>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Budget spent"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div id="progress-fill"></div>
+          </div>
+          <div class="budget-foot">
+            <span id="budget-note"></span
+            ><span>Estimates are separate from actual expenses.</span>
+          </div>
+        </section>
+        <div class="detail-columns">
+          <section>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">ONE DAY AT A TIME</p>
+                <h2>Your itinerary</h2>
+              </div>
+              <button class="primary" id="add-activity">＋ Add activity</button>
+            </div>
+            <div id="itinerary"></div>
+          </section>
+          <section>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">KEEP TRACK AS YOU GO</p>
+                <h2>Expenses</h2>
+              </div>
+              <button class="primary" id="add-expense">＋ Add expense</button>
+            </div>
+            <div class="expense-panel">
+              <label class="filter-label" for="category-filter"
+                >Filter by category</label
+              ><select id="category-filter">
+                <option value="">All categories</option>
+              </select>
+              <div id="expenses"></div>
+              <div id="category-totals" class="category-totals"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="container footer">
+      WAYFARER / Travel Itinerary &amp; Budget Planner
+      <span>Leave room for a detour.</span>
+    </footer>
+    <dialog id="trip-dialog" aria-labelledby="trip-dialog-title">
+      <form id="trip-form">
+        <div class="dialog-heading">
+          <h2 id="trip-dialog-title">Edit trip</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ×
+          </button>
+        </div>
+        <div id="trip-fields"></div>
+        <p class="form-error" role="alert"></p>
+        <div class="form-actions">
+          <button type="button" class="secondary" data-close>Cancel</button
+          ><button type="submit" class="primary">Save trip</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="record-dialog" aria-labelledby="record-title">
+      <form id="record-form">
+        <div class="dialog-heading">
+          <h2 id="record-title"></h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ×
+          </button>
+        </div>
+        <div id="record-fields"></div>
+        <p class="form-error" role="alert"></p>
+        <div class="form-actions">
+          <button type="button" class="secondary" data-close>Cancel</button
+          ><button class="primary" type="submit">Save</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
