@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
 require('dotenv').config();
 
 const studentRoutes = require('./routes/studentRoutes');
@@ -28,12 +27,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/studentDB
 // Mount student routes at /students
 app.use('/students', studentRoutes);
 
-// Serve the sample preview at the same address as the API.
-for (const file of ['index.html', 'style.css', 'script.js']) {
-    app.get('/' + file, (req, res) => res.sendFile(path.join(__dirname, file)));
-}
+// Display the single-file sample preview; the real API is at /students.
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(__dirname + '/index.html');
 });
 
 // Start the server

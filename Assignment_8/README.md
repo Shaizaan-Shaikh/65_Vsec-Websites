@@ -12,6 +12,7 @@ A simple REST API built with Node.js, Express.js, and MongoDB (Mongoose) to mana
 ## Project Structure
 ```
 Assignment_8/
+├── index.html             Single-file browser sample preview
 ├── server.js              Main server file
 ├── models/
 │   └── Student.js         Mongoose model

@@ -20,7 +20,7 @@ git commit -m "Initial commit"
 git branch -M main
 
 # Add the remote GitHub repository
-git remote add origin https://github.com/ChaitanyaMore37/Full-Stack-Assignments.git
+git remote add origin https://github.com/Shaizaan-Shaikh/65_Vsec-Websites.git
 
 # Push to GitHub and set upstream
 git push -u origin main

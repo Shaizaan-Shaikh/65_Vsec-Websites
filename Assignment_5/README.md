@@ -6,8 +6,8 @@ This assignment demonstrates how to create a local Git repository, connect it to
 Since this repository already exists locally and on GitHub, the steps below describe the workflow that was followed to set it up and how you can verify it.
 
 ## Repository
-- **GitHub URL:** https://github.com/ChaitanyaMore37/Full-Stack-Assignments
-- **Local Folder:** `Full-Stack-Assignments/`
+- **GitHub URL:** https://github.com/Shaizaan-Shaikh/65_Vsec-Websites
+- **Local Folder:** `65_Vsec-Websites/`
 
 ---
 
@@ -42,7 +42,7 @@ git branch -M main
 
 **7. Connect to your GitHub repository:**
 ```
-git remote add origin https://github.com/ChaitanyaMore37/Full-Stack-Assignments.git
+git remote add origin https://github.com/Shaizaan-Shaikh/65_Vsec-Websites.git
 ```
 
 **8. Push your code to GitHub:**

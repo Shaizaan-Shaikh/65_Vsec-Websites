@@ -17,8 +17,13 @@ function showMarksSection() {
 
 // Add a new student result after validating marks
 function addStudent() {
-  let name = document.getElementById("name").value;
-  let roll = document.getElementById("roll").value;
+  let name = document.getElementById("name").value.trim();
+  let roll = document.getElementById("roll").value.trim();
+
+  if (["m1", "m2", "m3", "m4", "m5"].some(id => document.getElementById(id).value.trim() === "")) {
+    alert("Enter marks for all five subjects");
+    return;
+  }
 
   let m1 = Number(document.getElementById("m1").value);
   let m2 = Number(document.getElementById("m2").value);

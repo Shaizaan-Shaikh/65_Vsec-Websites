@@ -23,7 +23,7 @@ Assignment_7/
 ```bash
 cd Assignment_7
 npm install
-npm run dev
+npm start
 ```
 
 Open the URL shown in the terminal (usually `http://localhost:5173`).
