@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/studentDB
 // Mount student routes at /students
 app.use('/students', studentRoutes);
 
-// Display the single-file sample preview; the real API is at /students.
+// Display the student interface; database requests use /students.
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, '127.0.0.1', () => {
     console.log('Server running on port ' + PORT);
-    console.log('Sample preview: http://127.0.0.1:' + PORT);
+    console.log('Student interface: http://127.0.0.1:' + PORT);
 });
 server.on('error', (err) => {
     console.error(err.code === 'EADDRINUSE'

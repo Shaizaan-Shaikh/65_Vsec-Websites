@@ -1,106 +1,163 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student CRUD · Assignment 8 Preview</title><style>
-body { margin: 24px auto; padding: 0 16px; max-width: 1000px; font-family: Arial, sans-serif; line-height: 1.5; }
-* { box-sizing: border-box; }
-header { display: flex; justify-content: space-between; }
-.preview-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 32px; }
-label { display: block; margin: 12px 0; }
-input { display: block; width: 100%; padding: 8px; margin-top: 4px; }
-button { padding: 6px 12px; cursor: pointer; }
-.buttons { display: flex; gap: 8px; }
-.student { border-bottom: 1px solid #ccc; padding: 12px 0; overflow-wrap: anywhere; }
-.student h3 { margin: 0; }
-.student p { margin: 6px 0; }
-.note, footer { font-size: 14px; margin-top: 24px; }
-[hidden] { display: none !important; }
-@media (max-width: 700px) { .preview-layout { grid-template-columns: 1fr; } }
-
-</style></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Management</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+    main { max-width: 700px; margin: 30px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 2px 10px #0000001a; }
+    h1 { text-align: center; font-size: 24px; color: #333; }
+    h2 { font-size: 18px; color: #444; margin-top: 24px; }
+    label { display: block; margin: 14px 0 5px; font-size: 14px; color: #555; }
+    input { width: 100%; padding: 9px 10px; border: 1px solid #ccc; border-radius: 4px; font: inherit; }
+    button { padding: 9px 14px; border: 0; border-radius: 4px; background: #4a90d9; color: white; cursor: pointer; font: inherit; font-size: 14px; }
+    button:hover { background: #357ab8; }
+    button:disabled { opacity: .6; cursor: wait; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .secondary { background: #666; }
+    .delete { background: #d93636; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: #4a90d9; color: white; text-align: left; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; overflow-wrap: anywhere; }
+    td:last-child { min-width: 140px; }
+    td button { margin: 2px; padding: 6px 10px; font-size: 12px; }
+    #status, #mode { font-size: 14px; line-height: 1.5; }
+    #status { color: #245ca0; }
+    #status.error { color: #b42318; }
+    [hidden] { display: none !important; }
+    @media(max-width: 500px) { body { padding: 12px; } main { margin: 12px auto; padding: 18px; } }
+  </style>
+</head>
 <body>
-<header><a class="brand" href="../index.html">SS<span>.</span></a><a href="../index.html">← All assignments</a></header>
-<main>
- <p class="eyebrow">ASSIGNMENT 08 · SAMPLE PREVIEW</p><h1>Student records<span>.</span></h1>
- <p class="intro">Try adding, editing and deleting fictional student records.<br>This preview uses temporary browser data. Refreshing restores the sample records.</p>
- <div class="preview-layout">
-  <section class="panel"><h2 id="form-title">Add a student</h2><form id="student-form">
-   <label>Name<input name="name" required maxlength="100" placeholder="Student name"></label>
-   <label>Roll number<input name="rollNumber" required maxlength="30" placeholder="e.g. 65"></label>
-   <label>Department<input name="department" required maxlength="80" value="Information Technology"></label>
-   <label>Marks<input name="marks" required type="number" min="0" max="100" step="0.01" placeholder="0–100"></label>
-   <div class="buttons"><button type="submit" id="save">Add student</button><button type="button" class="secondary" id="cancel" hidden>Cancel edit</button></div>
-  </form></section>
-  <section class="panel"><div class="list-heading"><h2>Students <span id="count"></span></h2><button type="button" class="secondary" id="reset">Reset sample</button></div><p id="status" role="status" aria-live="polite"></p><div id="students"></div></section>
- </div>
- <p class="note">The real assignment uses Express and MongoDB for persistent CRUD operations. <a href="https://github.com/Shaizaan-Shaikh/65_Vsec-Websites/tree/main/Assignment_8">View API source and setup instructions ↗</a></p>
-</main><footer>Assignment 8 · Student CRUD API sample preview</footer>
-<script>
-const samples = [
- { id: 'sample-1', name: 'Aarav Patil', rollNumber: '12', department: 'Information Technology', marks: 85 },
- { id: 'sample-2', name: 'Ananya Deshmukh', rollNumber: '24', department: 'Computer Engineering', marks: 92 },
- { id: 'sample-3', name: 'Rohan More', rollNumber: '38', department: 'Information Technology', marks: 78 },
-];
-let students = structuredClone(samples);
-let editing = null;
-const form = document.querySelector('#student-form');
-const list = document.querySelector('#students');
-const status = document.querySelector('#status');
-function render() {
- list.replaceChildren();
- document.querySelector('#count').textContent = `(${students.length})`;
- if (!students.length) { list.textContent = 'No students yet. Add a student to begin.'; return; }
- for (const student of students) {
-  const row = document.createElement('article'); row.className = 'student';
-  const info = document.createElement('div');
-  const title = document.createElement('h3'); title.textContent = student.name;
-  const meta = document.createElement('p'); meta.textContent = `Roll ${student.rollNumber} · ${student.department} · Marks ${student.marks}/100`;
-  info.append(title, meta);
-  const actions = document.createElement('div'); actions.className = 'buttons';
-  for (const action of ['Edit', 'Delete']) {
-   const button = document.createElement('button'); button.type = 'button'; button.textContent = action;
-   button.className = action === 'Edit' ? 'secondary' : 'delete';
-   button.addEventListener('click', () => {
-    if (action === 'Edit') {
-     editing = student.id;
-     for (const key of ['name', 'rollNumber', 'department', 'marks']) form.elements[key].value = student[key];
-     document.querySelector('#form-title').textContent = 'Edit student';
-     document.querySelector('#save').textContent = 'Save changes';
-     document.querySelector('#cancel').hidden = false;
-     form.elements.name.focus();
-    } else {
-     students = students.filter(item => item.id !== student.id);
-     if (editing === student.id) resetForm();
-     render(); status.textContent = 'Student removed from this preview.';
-    }
-   }); actions.append(button);
-  }
-  row.append(info, actions); list.append(row);
- }
-}
-function resetForm() {
- editing = null; form.reset();
- document.querySelector('#form-title').textContent = 'Add a student';
- document.querySelector('#save').textContent = 'Add student';
- document.querySelector('#cancel').hidden = true;
-}
-form.addEventListener('submit', event => {
- event.preventDefault();
- const values = Object.fromEntries(new FormData(form));
- for (const key of ['name', 'rollNumber', 'department']) {
-  values[key] = values[key].trim();
-  if (!values[key]) { status.textContent = 'Please fill in all student fields.'; form.elements[key].focus(); return; }
- }
- values.marks = Number(values.marks);
- if (editing) students = students.map(item => item.id === editing ? { ...item, ...values } : item);
- else students.push({ id: crypto.randomUUID(), ...values });
- status.textContent = editing ? 'Student updated in this preview.' : 'Student added to this preview.';
- resetForm(); render();
-});
-document.querySelector('#cancel').addEventListener('click', resetForm);
-document.querySelector('#reset').addEventListener('click', () => {
- students = structuredClone(samples); resetForm(); render(); status.textContent = 'Sample records restored.';
-});
-render();
+  <main>
+    <h1>Student Management</h1>
+    <p id="mode"></p>
+    <h2 id="form-title">Add Student</h2>
+    <form id="student-form">
+      <label for="name">Student Name</label>
+      <input id="name" name="name" required maxlength="100" placeholder="Enter student name">
+      <label for="rollNumber">Roll Number</label>
+      <input id="rollNumber" name="rollNumber" required maxlength="30" placeholder="Enter roll number">
+      <label for="department">Department</label>
+      <input id="department" name="department" required maxlength="80" placeholder="e.g. IT, Computer Science">
+      <label for="marks">Marks</label>
+      <input id="marks" name="marks" type="number" min="0" max="100" step="0.01" required placeholder="Enter marks">
+      <div class="actions">
+        <button type="submit" id="save">Add Student</button>
+        <button type="button" id="cancel" class="secondary" hidden>Cancel</button>
+      </div>
+    </form>
+    <p id="status" role="status" aria-live="polite"></p>
+    <h2>Student Records</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th>Roll No.</th><th>Department</th><th>Marks</th><th>Actions</th></tr></thead>
+        <tbody id="students"></tbody>
+      </table>
+    </div>
+  </main>
+  <script>
+    // GitHub Pages is a static preview. npm start uses the real /students API.
+    const demo = location.hostname.endsWith('.github.io') || location.protocol === 'file:';
+    let students = demo ? [
+      { _id: 'sample-1', name: 'Aarav Patil', rollNumber: '12', department: 'IT', marks: 85 },
+      { _id: 'sample-2', name: 'Ananya Deshmukh', rollNumber: '24', department: 'Computer Engineering', marks: 92 }
+    ] : [];
+    let editing = null;
+    const form = document.querySelector('#student-form');
+    const list = document.querySelector('#students');
+    const status = document.querySelector('#status');
+    document.querySelector('#mode').textContent = demo
+      ? 'Sample preview. Changes reset when you refresh the page.'
+      : 'Add and manage student records saved in MongoDB.';
 
-</script>
-</body></html>
+    function message(text, error = false) {
+      status.textContent = text;
+      status.classList.toggle('error', error);
+    }
+    async function request(url, method = 'GET', data) {
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: data ? JSON.stringify(data) : undefined,
+        signal: AbortSignal.timeout(15000)
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Request failed.');
+      return result;
+    }
+    function resetForm() {
+      editing = null;
+      form.reset();
+      document.querySelector('#form-title').textContent = 'Add Student';
+      document.querySelector('#save').textContent = 'Add Student';
+      document.querySelector('#cancel').hidden = true;
+    }
+    function render() {
+      list.replaceChildren();
+      if (!students.length) {
+        const cell = list.insertRow().insertCell();
+        cell.colSpan = 5;
+        cell.textContent = 'No students added yet.';
+      }
+      for (const student of students) {
+        const row = list.insertRow();
+        for (const key of ['name', 'rollNumber', 'department', 'marks']) row.insertCell().textContent = student[key];
+        const actions = row.insertCell();
+        const edit = document.createElement('button');
+        edit.type = 'button'; edit.textContent = 'Edit';
+        edit.onclick = () => {
+          editing = student._id;
+          for (const key of ['name', 'rollNumber', 'department', 'marks']) form.elements[key].value = student[key];
+          document.querySelector('#form-title').textContent = 'Edit Student';
+          document.querySelector('#save').textContent = 'Save Changes';
+          document.querySelector('#cancel').hidden = false;
+          form.elements.name.focus();
+        };
+        const remove = document.createElement('button');
+        remove.type = 'button'; remove.className = 'delete'; remove.textContent = 'Delete';
+        remove.onclick = async () => {
+          remove.disabled = true;
+          try {
+            if (demo) students = students.filter(item => item._id !== student._id);
+            else await request('/students/' + student._id, 'DELETE');
+            if (editing === student._id) resetForm();
+            await load(); message('Student deleted successfully.');
+          } catch (error) { message(error.message, true); }
+          finally { remove.disabled = false; }
+        };
+        actions.append(edit, remove);
+      }
+    }
+    async function load() {
+      if (!demo) students = await request('/students');
+      render();
+    }
+    form.onsubmit = async event => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      for (const key of ['name', 'rollNumber', 'department']) {
+        data[key] = data[key].trim();
+        if (!data[key]) { message('Please fill in all fields.', true); return; }
+      }
+      data.marks = Number(data.marks);
+      document.querySelector('#save').disabled = true;
+      try {
+        const updated = Boolean(editing);
+        if (demo) {
+          if (editing) students = students.map(item => item._id === editing ? { ...item, ...data } : item);
+          else students.push({ _id: crypto.randomUUID(), ...data });
+        } else await request('/students' + (editing ? '/' + editing : ''), editing ? 'PUT' : 'POST', data);
+        resetForm(); await load();
+        message(updated ? 'Student updated successfully.' : 'Student added successfully.');
+      } catch (error) { message(error.message, true); }
+      finally { document.querySelector('#save').disabled = false; }
+    };
+    document.querySelector('#cancel').onclick = resetForm;
+    load().catch(() => message('Could not load students. Start MongoDB and run npm start, then refresh.', true));
+  </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 
 Open [Assignment 8 on GitHub Pages](https://shaizaan-shaikh.github.io/65_Vsec-Websites/Assignment_8/) for the sample preview. It uses temporary browser records, independently of MongoDB.
 
-For local startup, open a terminal in `Assignment_8`, run `npm ci` once, then `npm start`. Open `http://127.0.0.1:5000` for the same sample preview. The real API is at `/students` and requires MongoDB. If no `.env` is present, it uses `mongodb://127.0.0.1:27017/studentDB`.
+For local startup, open a terminal in `Assignment_8`, run `npm ci` once, then `npm start`. Open `http://127.0.0.1:5000` for the student form and records table, connected to MongoDB through `/students`. Start MongoDB before using this local interface. If no `.env` is present, it uses `mongodb://127.0.0.1:27017/studentDB`.
 
 ## Description
 A simple REST API built with Node.js, Express.js, and MongoDB (Mongoose) to manage student records. Supports all four CRUD operations.
@@ -12,7 +12,7 @@ A simple REST API built with Node.js, Express.js, and MongoDB (Mongoose) to mana
 ## Project Structure
 ```
 Assignment_8/
-├── index.html             Single-file browser sample preview
+├── index.html             Single-file student interface
 ├── server.js              Main server file
 ├── models/
 │   └── Student.js         Mongoose model
